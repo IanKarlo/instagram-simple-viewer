@@ -20,15 +20,19 @@ app.get('/user-details', async (req, res) => {
   try {
     const { userToken } = req.query
 
+    console.log("First-step");
+    
     const data = await axios.get(`${API_URL}/me`, {
       params: {
         fields: 'id,username,account_type,media_count',
         access_token: userToken,
       }
     });
-
+  
+    console.log("Second-step");
+    
     const otherData = await axios.get(`${INSTAGRAM_URL}/${data.data.username}/?__a=1`);
-
+    
     const {
       username,
       id,
