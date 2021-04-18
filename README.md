@@ -39,3 +39,20 @@ The purpose of this application is to display the media of an Instagram user thr
         npm start
         or
         yarn start
+
+# Backend routes
+***
+The backend of project had 3 routes:
+- GET API/user-details?userToken
+In this route, the backend recieves the token from Instagram Basic Display API and get the user data. This route seems like an authentication route for this application, by recieving a token and serve the user basic data.
+- GET API/user-media?userToken
+In this route, the backend recieves the token from Instagram Basic Display API and get the user media. In this case, this route just serve the first 25 media from the user, but if it had more, is send to client the pagination data, that consists in a link to get more media.
+- GET API/page-media?next&previous
+In this route, the backend recieves if is next or previous page of media to get. It made a verification and made a request do Instagram API. If next or previous is not provided, it returns an error.
+
+# Frontend screens
+***
+- Token authentication screen
+In this screen the user can put the Instagram API token in the input to enter in the application.
+- Media screen
+In this screen the media of user is showed. The application had a pagination system, that shows only 25 media per page, and when the user can navigate through pages a button going to next/previous page is showed.
