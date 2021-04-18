@@ -4,7 +4,6 @@ const dotenv = require('dotenv').config();
 const axios = require('axios');
 
 const API_URL = 'https://graph.instagram.com';
-const INSTAGRAM_URL = "https://www.instagram.com";
 
 const app = express();
 
@@ -19,20 +18,14 @@ app.get('/', (req, res) => {
 app.get('/user-details', async (req, res) => {
   try {
     const { userToken } = req.query
-    
+
     const data = await axios.get(`${API_URL}/me`, {
       params: {
         fields: 'id,username,account_type,media_count',
         access_token: userToken,
       }
     });
-  
-    console.log(data.data);
-    
-    const otherData = await axios.get(`${INSTAGRAM_URL}/${data.data.username}/?__a=1`).then(r => JSON.parse(r.data.split("window._sharedData = ")[1].split(";<\/script>")[0]).entry_data.ProfilePage[0].graphql);
-    
-    return res.send(otherData);
-    
+
     const {
       username,
       id,
@@ -40,20 +33,11 @@ app.get('/user-details', async (req, res) => {
       account_type
     } = data.data;
 
-    const {
-      biography,
-      profile_pic_url,
-      full_name
-    } = otherData.data.graphql.user;
-
     return res.send({
       username,
       id,
       media_count,
       account_type,
-      biography,
-      profile_pic_url,
-      full_name
     });
   } catch(err) {
     console.log(err.message, '/user-details');
@@ -94,10 +78,10 @@ app.get('/page-media', async (req, res) => {
       const data = await axios.get(next+'&fields=username,id,caption,media_type,media_url,permalink,thumbnail_url,timestamp,children{media_url, media_type}');
       
       const newData = {
-      next: (data.data.paging && data.data.paging.next) ? data.data.paging.next : null, 
-      previous: (data.data.paging && data.data.paging.previous) ? data.data.paging.previous : null,
-      media: data.data.data
-    }
+        next: data.data.paging.next ? data.data.paging.next : null, 
+        previous: data.data.paging.previous ? data.data.paging.previous : null,
+        media: data.data.data
+      }
   
       return res.send(newData);
 
@@ -106,10 +90,10 @@ app.get('/page-media', async (req, res) => {
       const data = await axios.get(previous+'&fields=username,id,caption,media_type,media_url,permalink,thumbnail_url,timestamp,children{media_url, media_type}');
       
       const newData = {
-      next: (data.data.paging && data.data.paging.next) ? data.data.paging.next : null, 
-      previous: (data.data.paging && data.data.paging.previous) ? data.data.paging.previous : null,
-      media: data.data.data
-    }
+        next: data.data.paging.next ? data.data.paging.next : null, 
+        previous: data.data.paging.previous ? data.data.paging.previous : null,
+        media: data.data.data
+      }
   
       return res.send(newData);
     } 
