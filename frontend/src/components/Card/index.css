@@ -1,0 +1,81 @@
+.card-wrapper {
+  width: 280px;
+  height: 310px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  margin: auto;
+  margin-bottom: 20px;
+  border-radius: 5px;
+}
+
+.card {
+  width: 100%;
+  height: calc(100% - 30px);
+  padding: 0;
+  border: 1px solid #CCC;
+  border-radius: 5px;
+  position: relative;
+}
+
+.card img {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+  border-radius: 5px;
+}
+
+.more-photos {
+  font-size: 30px;
+  color: white;
+  position:absolute;
+  top: 5px;
+  right: 10px;
+  z-index: 9;
+}
+
+.shadow {
+  opacity: 0;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: black;
+  transition: all .3s linear;
+}
+
+.card:hover {
+  cursor: pointer;
+}
+
+.card:hover .shadow {
+  opacity: 0.5;
+}
+
+.see-instagram {
+  width: 100%;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: black;
+  opacity: 1;
+  font-size: 30px;
+  margin-top: 5px;
+}
+
+.see-instagram .instagram-tooltip{
+  color: black !important;
+}
+.see-instagram .instagram-tooltip:hover {
+  cursor: pointer;
+}
+
+.see-instagram p {
+  margin-top: 10px;
+  margin-left: 15px;
+  color: #888;
+  font-size: 13px;
+}
