@@ -52,7 +52,6 @@ const Modal = ({data, setData}) => {
             </div>
             <div className="comment-wrapper">
               <div>
-                <img src={user.profile_pic_url} alt="profile"/>
                 <p><strong>{user.username}</strong>
                 {data.caption}</p>
               </div>
@@ -78,7 +77,6 @@ const Modal = ({data, setData}) => {
             </div>
             <div className="comment-wrapper">
               <div>
-                <img src={user.profile_pic_url} alt="profile"/>
                 <p><strong>{user.username}</strong>
                 {data.caption}</p>
               </div>
@@ -105,7 +103,6 @@ const Modal = ({data, setData}) => {
             </div>
             <div className="comment-wrapper">
               <div>
-                <img src={user.profile_pic_url} alt="profile"/>
                 <p><strong>{user.username}</strong>
                 {data.caption}</p>
               </div>

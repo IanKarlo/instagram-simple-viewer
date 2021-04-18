@@ -22,14 +22,12 @@ const MainScreen = () => {
 
 
   useEffect(() => {
-    console.log(user);
     if(!user) {
       setRedirect(true);
       setLoadingScreen(false);
     }
     else {
       getMedia(user.token).then(r => {
-        console.log(user);
         const media = r.data.media;
         setPagination({next: r.data.next, previous: r.data.previous});
         const photos = media.map((e, i) => {
@@ -83,9 +81,8 @@ const MainScreen = () => {
         </Button>
       </div>
       <div className="header">
-        <img src={user.profile_pic_url} className="profile-pic" alt="profile_pic"/>
         <div>
-          <h1>{user.full_name} (<a target="_blank" href={`https://instagram.com/${user.username}`}  rel="noreferrer">@{user.username}</a>)</h1>
+          <h1><a target="_blank" href={`https://instagram.com/${user.username}`}  rel="noreferrer">@{user.username}</a></h1>
           <h3>{user.media_count} publicações</h3>
         </div>
       </div>

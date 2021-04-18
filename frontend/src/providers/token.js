@@ -7,7 +7,7 @@ export const validateToken = async (token) => {
     params: {
       userToken: token
     }
-  });
+  })
 }
 
 export const getMedia = async (token) => {
