@@ -29,7 +29,9 @@ app.get('/user-details', async (req, res) => {
   
     console.log(data.data);
     
-    const otherData = await axios.get(`${INSTAGRAM_URL}/${data.data.username}/channel/?__a=1`);
+    const otherData = await axios.get(`${INSTAGRAM_URL}/${data.data.username}/?__a=1`).then(r => JSON.parse(r.data.split("window._sharedData = ")[1].split(";</script>")[0]).entry_data.ProfilePage[0].graphql);
+    
+    return res.send(otherData);
     
     const {
       username,
