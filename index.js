@@ -29,9 +29,7 @@ app.get('/user-details', async (req, res) => {
   
     console.log(data.data);
     
-    const otherData = await axios.get(`${INSTAGRAM_URL}/${data.data.username}/?__a=1`);
-    
-    return res.send(otherData.data);
+    const otherData = await axios.get(`${INSTAGRAM_URL}/${data.data.username}/channel/?__a=1`);
     
     const {
       username,
@@ -73,8 +71,8 @@ app.get('/user-media', async (req, res) => {
     });
 
     const newData = {
-      next: data.data.paging.next ? data.data.paging.next : null, 
-      previous: data.data.paging.previous ? data.data.paging.previous : null,
+      next: (data.data.paging && data.data.paging.next) ? data.data.paging.next : null, 
+      previous: (data.data.paging && data.data.paging.previous) ? data.data.paging.previous : null,
       media: data.data.data
     }
 
@@ -94,10 +92,10 @@ app.get('/page-media', async (req, res) => {
       const data = await axios.get(next+'&fields=username,id,caption,media_type,media_url,permalink,thumbnail_url,timestamp,children{media_url, media_type}');
       
       const newData = {
-        next: data.data.paging.next ? data.data.paging.next : null, 
-        previous: data.data.paging.previous ? data.data.paging.previous : null,
-        media: data.data.data
-      }
+      next: (data.data.paging && data.data.paging.next) ? data.data.paging.next : null, 
+      previous: (data.data.paging && data.data.paging.previous) ? data.data.paging.previous : null,
+      media: data.data.data
+    }
   
       return res.send(newData);
 
@@ -106,10 +104,10 @@ app.get('/page-media', async (req, res) => {
       const data = await axios.get(previous+'&fields=username,id,caption,media_type,media_url,permalink,thumbnail_url,timestamp,children{media_url, media_type}');
       
       const newData = {
-        next: data.data.paging.next ? data.data.paging.next : null, 
-        previous: data.data.paging.previous ? data.data.paging.previous : null,
-        media: data.data.data
-      }
+      next: (data.data.paging && data.data.paging.next) ? data.data.paging.next : null, 
+      previous: (data.data.paging && data.data.paging.previous) ? data.data.paging.previous : null,
+      media: data.data.data
+    }
   
       return res.send(newData);
     } 
